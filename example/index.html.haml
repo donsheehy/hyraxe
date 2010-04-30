@@ -1,0 +1,9 @@
+- layout
+  %h1 This is the main page.
+  %h2 and it's awesome
+
+  %ol
+    - widgets.each do |w|
+      %li
+        = "a #{w.name} is #{w.color}"
+      
