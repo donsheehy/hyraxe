@@ -1,0 +1,5 @@
+- name: foo
+  color: blue
+  
+- name: bar
+  color: red
