@@ -34,4 +34,8 @@ describe Hyrax::DataLoader do
     @data_loader.yaml_files[1].should match(/list.yaml/)
   end
   
+  it "should create an instance variables on the scope for each yaml file" do
+    @data_loader.scope.instance_variables.should == ["@hash", "@list"] 
+  end
+  
 end
