@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Hyrax::DataLoader do
+describe Hyraxe::DataLoader do
   before :each do
     @path = File.dirname(__FILE__) + "/test_site/"
-    @data_loader = Hyrax::DataLoader.new(@path)
+    @data_loader = Hyraxe::DataLoader.new(@path)
   end
   
   it "should load a yaml file with an array" do

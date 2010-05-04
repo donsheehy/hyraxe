@@ -2,7 +2,7 @@ require 'rubygems'
 require 'haml'
 require 'hashie'
 
-module Hyrax
+module Hyraxe
   
   class Base
     def initialize
