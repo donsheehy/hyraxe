@@ -42,12 +42,12 @@ describe Hyraxe::DataLoader do
     @data_loader.scope.instance_variable_defined?(:@list).should be_true
   end
   
-  it "should create a method on the scope for each .haml file" do
-    @data_loader.scope.should respond_to(:layout)
-    @data_loader.scope.should respond_to(:partial)
-    @data_loader.scope.should_not respond_to(:index)
-    @data_loader.scope.should_not respond_to(:list)
-  end
+  # it "should create a method on the scope for each .haml file" do
+  #   @data_loader.scope.should respond_to(:layout)
+  #   @data_loader.scope.should respond_to(:partial)
+  #   @data_loader.scope.should_not respond_to(:index)
+  #   @data_loader.scope.should_not respond_to(:list)
+  # end
   
   it "should load all of the haml files as strings and expose them by type" do
     @data_loader.pages.should_not be_nil

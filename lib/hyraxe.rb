@@ -54,10 +54,7 @@ module Hyraxe
 
     def initialize_haml_partials
       @partials.each do |partial|
-        @scope.new_method(partial.base_name) do
-          partial_engine = Haml::Engine.new(partial.haml)
-          partial_engine.render{ capture_haml { yield } }
-        end
+        @scope.new_partial(partial)
       end      
     end
 
@@ -65,18 +62,31 @@ module Hyraxe
   
   # This class just collects methods and instance variables for use in the haml templates.
   class RenderScope
-    def new_method(method_name, &block)
-      self.class.send(:define_method, method_name, &block)
+    def initialize
+      @partials = Hash.new
+    end
+    
+    def new_partial(partial)
+      @partials[partial.base_name] = partial
+      # self.class.send(:define_method, method_name, &block)
+    end
+    
+    def method_missing(m, *args, &block) 
+      partial = @partials[m]
+      if partial
+        partial.engine.render{ capture_haml { yield } }
+      end
     end
   end
   
   class Page
-    attr_reader :base_name, :haml, :path
+    attr_reader :base_name, :haml, :path, :engine
     
     def initialize(base_name, haml, path)
       @base_name = base_name
       @haml = haml
       @path = path
+      @engine = Haml::Engine.new(@haml)
     end
     
     def render
